@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <!-- General head tags -->
+    <meta charset="UTF-8" />
+    <title>Churrasco UX/UI</title>
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+    />
+
+    <!-- JS Cookies -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  </head>
+
+  <body class="min-vh-100 d-flex flex-column">
+    <main class="d-flex flex-column flex-grow-1">
+      <article class="d-flex flex-column flex-grow-1">
+        <!-- Login Screen -->
+        <section
+          id="login-screen"
+          class="d-flex justify-content-center align-items-center flex-grow-1"
+        >
+          <div class="login text-center">
+            <img src="./images/logo.png" alt="Logo" class="w-75 h-auto mb-4" />
+
+            <form id="login-form" data-bind="submit: login">
+              <div
+                class="input-group bg-white d-flex align-items-center flex-nowrap rounded-top input__custom"
+              >
+                <span class="p-2">
+                  <svg
+                    width="16px"
+                    version="1.1"
+                    height="16px"
+                    fill="#B3B3B3"
+                    stroke="#B3B3B3"
+                    stroke-width="0"
+                    viewBox="0 0 16 16"
+                    aria-label="Username"
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-bind="value: username, css: { 'input__icon': username().length > 0 }"
+                  >
+                    <path
+                      d="M9 11.041v-0.825c1.102-0.621 2-2.168 2-3.716 0-2.485 0-4.5-3-4.5s-3 2.015-3 4.5c0 1.548 0.898 3.095 2 3.716v0.825c-3.392 0.277-6 1.944-6 3.959h14c0-2.015-2.608-3.682-6-3.959z"
+                    ></path>
+                  </svg>
+                </span>
+
+                <input
+                  required
+                  type="text"
+                  id="username"
+                  autocomplete="off"
+                  placeholder="Username"
+                  data-bind="value: username"
+                  class="bg-transparent border-0 p-2 w-100 outline-none"
+                />
+              </div>
+
+              <div
+                class="input-group bg-white d-flex align-items-center flex-nowrap rounded-bottom mb-2 input__custom--alt"
+              >
+                <span class="p-2">
+                  <svg
+                    width="14px"
+                    height="14px"
+                    fill="#B3B3B3"
+                    stroke="#B3B3B3"
+                    stroke-width="0"
+                    viewBox="0 0 448 512"
+                    aria-label="Password"
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-bind="value: password, css: { 'input__icon': username().length > 0 }"
+                  >
+                    <path
+                      d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                    ></path>
+                  </svg>
+                </span>
+
+                <input
+                  required
+                  id="password"
+                  type="password"
+                  autocomplete="off"
+                  placeholder="Password"
+                  data-bind="value: password"
+                  class="bg-transparent border-0 p-2 w-100"
+                />
+              </div>
+
+              <section
+                class="d-flex justify-content-between align-items-center"
+              >
+                <div class="form-check text-start ms-2">
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    autocomplete="off"
+                    data-bind="checked: remember, disable: isLoading"
+                    class="form-check-input rounded-0 checkbox__custom"
+                  />
+
+                  <label class="label__custom" for="rememberMe">
+                    Remember
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  data-bind="disable: isLoading"
+                  class="btn btn-primary btn__custom"
+                >
+                  Log in
+                </button>
+              </section>
+
+              <span
+                id="login-error"
+                class="d-block text-danger mt-4"
+                data-bind="text: loginError, visible: loginError().length > 0"
+              ></span>
+            </form>
+          </div>
+        </section>
+
+        <!-- Products Screen -->
+        <section id="products-screen" class="container d-none">
+          <div class="d-flex justify-content-between align-items-center py-5">
+            <h2 class="text-white fs-3">Listado de productos</h2>
+
+            <img alt="Logo" class="logo" src="./images/logo.png" />
+
+            <section class="d-flex gap-2 align-items-center">
+              <button
+                type="button"
+                id="add-product-btn"
+                class="btn btn-primary btn__custom"
+                data-bind="click: function() { showScreen('add-product-screen'); }"
+              >
+                Agregar producto
+              </button>
+
+              <button
+                id="logout"
+                button="button"
+                data-bind="click: logout"
+                class="btn btn-primary btn__custom--alt"
+              >
+                Cerrar sesion
+              </button>
+            </section>
+          </div>
+
+          <ul
+            id="product-list"
+            class="list-unstyled row"
+            data-bind="foreach: products"
+          >
+            <li class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <button
+                type="button"
+                class="card w-100 d-block card__custom"
+                data-bind="click: $parent.showProductDetails"
+              >
+                <!-- Product image -->
+                <div class="m-4 card__custom--image">
+                  <img
+                    alt="Product image"
+                    data-bind="attr: { src: imageUrl }"
+                    class="card-img-top object-fit-fill"
+                  />
+                </div>
+
+                <div
+                  class="card-body d-flex flex-column p-0 pt-2 justify-content-between border-top mx-4 card__custom--body"
+                >
+                  <!-- Product name -->
+                  <h5
+                    data-bind="text: name ? name : 'Nombre'"
+                    class="card-title text-white fs-4 fw-bold"
+                  ></h5>
+
+                  <!-- Product price -->
+                  <p
+                    class="card-price text-white fw-light fs-6"
+                    data-bind="text: typeof price !== 'undefined' ? price + ' ' + (typeof currency !== 'undefined' ? currency : '') : 'Precio no disponible'"
+                  ></p>
+                </div>
+              </button>
+            </li>
+          </ul>
+
+          <span
+            id="error"
+            class="d-block text-danger mt-4 fs-4 text-center"
+            data-bind="text: error, visible: error().length > 0"
+          ></span>
+
+          <span
+            data-bind="visible: isLoading"
+            class="d-flex w-100 align-items-center justify-content-center"
+          >
+            <span class="loader" data-bind="visible: isLoading"></span>
+          </span>
+        </section>
+
+        <!-- Product detail Screen -->
+        <section id="product-detail-screen" class="container d-none mb-4">
+          <div class="d-flex justify-content-between align-items-center py-5">
+            <div data-bind="with: selectedProduct">
+              <h2
+                class="text-white fs-3"
+                data-bind="text: typeof name !== 'undefined' ? name : 'Nombre del producto'"
+              ></h2>
+            </div>
+
+            <button class="btn btn-primary btn__custom" data-bind="click: back">
+              Volver a los productos
+            </button>
+          </div>
+
+          <div
+            data-bind="with: selectedProduct"
+            class="rounded p-5 row card__custom--alt"
+          >
+            <section class="col-6 un">
+              <ul
+                data-bind="foreach: verifiedPictures"
+                class="row list-unstyled"
+              >
+                <li class="col-3 col-md-6">
+                  <img
+                    alt="Product image"
+                    data-bind="attr: { src: $data }"
+                    class="product-image w-100 rounded"
+                  />
+                </li>
+              </ul>
+            </section>
+
+            <section class="col-6">
+              <h2
+                class="text-white fs-1 mb-4 fw-bold"
+                data-bind="text: typeof name !== 'undefined' ? name : 'Nombre del producto'"
+              ></h2>
+
+              <p class="text-white fs-5 fw-light">
+                SKU:
+                <span
+                  data-bind="text: typeof SKU !== 'undefined' ? SKU : ''"
+                ></span>
+              </p>
+
+              <p class="text-white fs-5 fw-light">
+                Codigo:
+                <span
+                  data-bind="text: typeof code !== 'undefined' ? code : ''"
+                ></span>
+              </p>
+
+              <p class="text-white fs-5 fw-light">
+                Precio:
+                <span
+                  data-bind="text: typeof price !== 'undefined' ? price : 'Precio'"
+                ></span>
+
+                <span
+                  data-bind="text: typeof currency !== 'undefined' ? currency : ''"
+                ></span>
+              </p>
+
+              <p class="text-white fs-5 fw-normal">
+                Descripción:
+                <span
+                  data-bind="text: typeof description !== 'undefined' ? description : 'Descripción'"
+                ></span>
+              </p>
+            </section>
+          </div>
+        </section>
+
+        <!-- Add Product Screen -->
+        <section
+          id="add-product-screen"
+          class="container d-flex flex-column justify-content-center align-items-center flex-grow-1"
+        >
+          <h2 class="my-4 text-white">Agregar producto</h2>
+
+          <form
+            id="add-product-form"
+            data-bind="submit: addProduct"
+            class="form__custom"
+          >
+            <div
+              class="input-group bg-white d-flex align-items-center flex-nowrap rounded-top input__custom--alt2"
+            >
+              <span class="p-2">
+                <svg
+                  width="16px"
+                  height="16px"
+                  fill="#B3B3B3"
+                  stroke="#B3B3B3"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-bind="value: sku, css: { 'input__icon': sku().length > 0 }"
+                >
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+
+                  <path
+                    d="m20.5 10 .5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4h4zm-7 4h-4l1-4h4l-1 4z"
+                  ></path>
+                </svg>
+              </span>
+
+              <input
+                required
+                type="text"
+                id="product-sku"
+                placeholder="SKU"
+                autocomplete="off"
+                data-bind="value: sku, disable: isLoading"
+                class="bg-transparent border-0 p-2 w-100 outline-none"
+              />
+            </div>
+
+            <div
+              class="input-group bg-white d-flex align-items-center flex-nowrap input__custom--alt2"
+            >
+              <span class="p-2">
+                <svg
+                  width="16px"
+                  height="16px"
+                  fill="#B3B3B3"
+                  stroke="#B3B3B3"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-bind="value: name, css: { 'input__icon': name().length > 0 }"
+                >
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+
+                  <path
+                    d="M18.41 5.8 17.2 4.59c-.78-.78-2.05-.78-2.83 0l-2.68 2.68L3 15.96V20h4.04l8.74-8.74 2.63-2.63c.79-.78.79-2.05 0-2.83zM6.21 18H5v-1.21l8.66-8.66 1.21 1.21L6.21 18zM11 20l4-4h6v4H11z"
+                  ></path>
+                </svg>
+              </span>
+
+              <input
+                required
+                type="text"
+                id="product-name"
+                autocomplete="off"
+                placeholder="Nombre"
+                data-bind="value: name, disable: isLoading"
+                class="bg-transparent border-0 p-2 w-100 outline-none"
+              />
+            </div>
+
+            <div
+              class="input-group bg-white d-flex align-items-center flex-nowrap input__custom--alt2"
+            >
+              <span class="p-2">
+                <svg
+                  width="16px"
+                  height="16px"
+                  fill="#B3B3B3"
+                  stroke="#B3B3B3"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-bind="value: price, css: { 'input__icon': price().length > 0 }"
+                >
+                  <path
+                    d="M435.2 48H312.3c-3.8 0-7.5 1.5-10.2 4.2L56.4 297.9c-11.2 11.2-11.2 29.5 0 40.7l117 117c11.2 11.2 29.5 11.2 40.7 0L459.7 210c2.7-2.7 4.2-6.4 4.2-10.2v-123C464 60.9 451.1 48 435.2 48zm-47.7 111.8c-20.4 2.2-37.4-14.9-35.3-35.3 1.6-14.8 13.5-26.8 28.3-28.3 20.4-2.2 37.4 14.9 35.3 35.3-1.6 14.8-13.5 26.7-28.3 28.3z"
+                  ></path>
+                </svg>
+              </span>
+
+              <input
+                required
+                type="text"
+                id="product-price"
+                autocomplete="off"
+                placeholder="Precio"
+                data-bind="value: price, disable: isLoading"
+                class="bg-transparent border-0 p-2 w-100 outline-none"
+              />
+            </div>
+
+            <div
+              class="input-group bg-white d-flex align-items-center flex-nowrap input__custom--alt2"
+            >
+              <span class="p-2">
+                <svg
+                  width="16px"
+                  height="16px"
+                  fill="#B3B3B3"
+                  stroke="#B3B3B3"
+                  stroke-width="0"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-bind="value: price, css: { 'input__icon': price().length > 0 }"
+                >
+                  <path
+                    d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"
+                  ></path>
+                </svg>
+              </span>
+
+              <input
+                required
+                type="text"
+                autocomplete="off"
+                placeholder="Moneda"
+                id="product-currency"
+                data-bind="value: currency, disable: isLoading"
+                class="bg-transparent border-0 p-2 w-100 outline-none"
+              />
+            </div>
+
+            <div
+              class="input-group bg-white d-flex align-items-center border-top-0 flex-nowrap rounded-bottom input__custom--alt2"
+            >
+              <input
+                required
+                multiple
+                type="file"
+                id="product-pictures"
+                placeholder="Imágenes"
+                data-bind="disable: isLoading"
+                class="form-control rounded-left-0 rounded-right-0 rounded-top-0"
+              />
+            </div>
+
+            <section class="d-flex gap-2 align-items-center mt-3">
+              <button
+                id="submit"
+                type="submit"
+                data-bind="disable: isLoading"
+                class="btn btn-primary btn__custom"
+              >
+                Enviar
+              </button>
+
+              <button
+                id="back"
+                data-bind="click: back"
+                class="btn btn-primary btn__custom--alt"
+              >
+                Volver
+              </button>
+            </section>
+
+            <span
+              id="add-error"
+              class="d-block text-danger text-center mt-4"
+              data-bind="text: error, visible: error().length > 0"
+            ></span>
+          </form>
+        </section>
+
+        <section
+          style="z-index: 11"
+          class="toast-container position-fixed bottom-0 end-0 p-3"
+        >
+          <div
+            role="alert"
+            id="product-toast"
+            aria-atomic="true"
+            aria-live="assertive"
+          >
+            <section class="toast-header">
+              <strong class="me-auto">Notificación</strong>
+
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </section>
+
+            <p class="toast-body">Producto agregado exitosamente.</p>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <p class="text-center text__footer">Web services under your control</p>
+    </footer>
+
+    <!-- jQuery, Bootstrap JS, Knockout.js, and custom script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      crossorigin="anonymous"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

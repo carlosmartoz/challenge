@@ -1,0 +1,178 @@
+/* General */
+input:focus {
+  outline: none;
+}
+::placeholder {
+  color: #b3b3b3;
+}
+body {
+  color: white;
+  background: rgb(35, 30, 70);
+  background: linear-gradient(
+    360deg,
+    rgba(35, 30, 70, 1) 0%,
+    rgba(46, 40, 92, 1) 48%,
+    rgba(59, 52, 121, 1) 100%
+  );
+}
+
+/* Login */
+.login {
+  width: 252px;
+  min-height: 346px;
+}
+
+/* Input */
+.input__custom {
+  border-top: 1px solid #62383c;
+  border-left: 1px solid #62383c;
+  border-right: 1px solid #62383c;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: -1px -1px 2px #62383c, 1px -1px 2px #62383c, 1px 2px 2px #62383c;
+}
+.input__custom svg {
+  transition: all ease-in-out 0.2s;
+}
+.input__custom:hover svg,
+.input__custom:focus-within svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+.input__custom--alt {
+  border-left: 1px solid #342e6a;
+  border-right: 1px solid #342e6a;
+  border-bottom: 1px solid #342e6a;
+  box-shadow: -1px 1px 2px #342e6a, 1px 1px 2px #342e6a, 1px 2px 2px #342e6a;
+}
+.input__custom--alt svg {
+  transition: all ease-in-out 0.2s;
+}
+.input__custom--alt:hover svg,
+.input__custom--alt:focus-within svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+.input__custom--alt2 {
+  border: 1px solid #e5e5e5;
+}
+.input__custom--alt2 svg {
+  transition: all ease-in-out 0.2s;
+}
+.input__custom--alt2:hover {
+  border: 1px solid #e5e5e5;
+}
+.input__custom--alt2:hover svg,
+.input__custom--alt2:focus-within svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Input icon */
+.input__icon {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Button */
+.btn__custom {
+  border-color: #26214d !important;
+  background-color: #26214d !important;
+}
+.btn__custom:hover {
+  border-color: #191636 !important;
+  background-color: #191636 !important;
+}
+.btn__custom--alt {
+  border-color: #c22132 !important;
+  background-color: #c22132 !important;
+}
+.btn__custom--alt:hover {
+  border-color: #74141d !important;
+  background-color: #74141d !important;
+}
+
+/* Checkbox */
+.checkbox__custom {
+  transition: all ease-in-out 0.2s;
+}
+.checkbox__custom.form-check-input:focus {
+  box-shadow: none;
+  border-color: #3c357a;
+}
+.checkbox__custom.form-check-input:checked {
+  border-color: #3c357a;
+  background-color: #3c357a;
+}
+
+/* Label */
+.label__custom {
+  font-size: 12px;
+  color: #8e8ca3;
+}
+
+/* Text footer */
+.text__footer {
+  font-size: 14px;
+  color: #86898c;
+}
+
+/* Logo */
+.logo {
+  width: 156px;
+  height: auto;
+}
+
+/* Card */
+.card__custom {
+  transition: all ease-in-out 0.2s;
+  backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.card__custom--alt {
+  backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.card__custom:hover {
+  transform: translateY(-12px);
+}
+.card__custom--body.card-body {
+  border-color: #dddddd20 !important;
+}
+.card__custom--image {
+  background-color: #dddddd;
+  border-radius: 0.375rem !important;
+}
+.card__custom--image .card-img-top {
+  height: 240px !important;
+  border-radius: 0.375rem !important;
+}
+
+/* Loader */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form */
+.form__custom {
+  height: 320px;
+}
+
+/* Toast */
+.toast__custom {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
