@@ -321,7 +321,15 @@ function ViewModel() {
         // Set loading
         self.isLoading(false);
 
-        alert("Producto agregado exitosamente.");
+        // Get toast
+        const toastLiveExample = document.getElementById("liveToast");
+
+        // Create toast
+        const toastBootstrap =
+          bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+
+        // Show toast
+        toastBootstrap.show();
       },
     });
   };

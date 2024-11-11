@@ -482,22 +482,24 @@
           </form>
         </section>
 
-        <div
-          id="toast"
-          class="toast align-items-center text-bg-primary border-0"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div class="d-flex">
-            <div class="toast-body">Producto agregado exitosamente.</div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div
+            role="alert"
+            id="liveToast"
+            aria-atomic="true"
+            aria-live="assertive"
+            class="toast align-items-center text-black border-0 bg-white"
+          >
+            <div class="d-flex">
+              <div class="toast-body">Producto agregado correctamente.</div>
 
-            <button
-              type="button"
-              class="btn-close btn-close-white me-2 m-auto"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
+              <button
+                type="button"
+                class="btn-close btn-close-black me-2 m-auto"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </div>
           </div>
         </div>
       </article>
