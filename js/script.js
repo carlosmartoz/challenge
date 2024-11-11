@@ -307,15 +307,6 @@ function ViewModel() {
       contentType: "application/json",
       data: JSON.stringify(productData),
       success: function () {
-        // Show toast
-        const toastEl = document.getElementById("product-toast");
-
-        // Toast
-        const toast = new bootstrap.Toast(toastEl);
-
-        // Show
-        toast.show();
-
         // Change the screen
         self.showScreen("products-screen");
 
@@ -329,6 +320,8 @@ function ViewModel() {
       complete: function () {
         // Set loading
         self.isLoading(false);
+
+        alert("Producto agregado exitosamente.");
       },
     });
   };

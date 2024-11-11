@@ -171,8 +171,3 @@ body {
 .form__custom {
   height: 320px;
 }
-
-/* Toast */
-.toast__custom {
-  background: rgba(255, 255, 255, 0.05) !important;
-}
