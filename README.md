@@ -8,4 +8,4 @@
 
 ## Installation
 
-1. Just open in your browser or use any local server.
+1. Simply open in your browser or run it on any local server.
